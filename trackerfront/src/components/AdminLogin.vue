@@ -14,10 +14,12 @@
 
                 <h4>University of Uyo <br>Tracking sytem</h4>
 
-                <div style="margin-top: 7%;"> Admin Portal</div>
-                <form action="" style="grid; grid-template-columns: 1fr 1fr;  column-gap: 50px;">
+                <div style="margin-top: 7%; margin-bottom: 2rem; color:maroon">Login</div>
+                <form action="" style="grid; grid-template-columns: 1fr 1fr;  column-gap: 50px;     margin-bottom: 2rem;
+">
                     <input type="text" name="" id="staffid" placeholder="staff id">
                     <input type="password" name="" id="pass" placeholder="password">
+                    <button style="margin-top: 2rem;" class="btnsubmit">Submit</button>
                 </form>
 
                 <div style="line-height: 0rem;">
@@ -43,6 +45,18 @@
 </script>
 
 <style scoped>
+.btnsubmit{
+    padding: 0.5rem 1rem;
+    border: none;
+    background-color: green;
+    color: white;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.btnsubmit:hover{
+    background-color: rgb(40, 119, 40);
+}
+
 .homeparent{
     min-height: 100vh;
     min-width: 100vw;
@@ -51,6 +65,7 @@
     justify-content: center;
     align-items: center;
     font-size: 1.2rem;
+    position: fixed;
 }
 
 .homegrid{

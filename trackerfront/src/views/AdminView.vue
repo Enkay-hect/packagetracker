@@ -31,13 +31,12 @@
 
 <script setup>
 import AdminLogin from '../components/AdminLogin.vue';
-import AdminSignup from '../components/AdminSignup.vue'
+import AdminSignup from '../components/AdminSignup.vue';
 
 import { shallowRef, ref } from 'vue';
 
 const activeLink = shallowRef(AdminLogin);
 
-const myStyle = ref('green')
 
 </script>
 
@@ -46,7 +45,7 @@ const myStyle = ref('green')
 .nav{
     width: 100%;
     height: 5rem;
-    position: fixed;
+    position: sticky;
     display: flex;
     justify-content: center;
 }

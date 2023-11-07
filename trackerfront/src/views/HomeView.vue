@@ -56,8 +56,29 @@
     text-align: center;
 }
 
+.homegrid form input{
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    height: 2rem;
+    border: 2px solid black;
+}
+.homegrid form button{
+    height: 2rem;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background-color: green;
+    color: white;
+    border: 2px solid green;
+}
+
 .homegrid img{
     height: 6rem;
     width: 8rem;
+}
+
+@media (max-width: 700px) {
+    .homegrid{
+        width: 85%;
+    }
 }
 </style>

@@ -14,13 +14,19 @@
 
                 <h4>University of Uyo <br>Tracking sytem</h4>
 
-                <div style="margin-top: 7%;"> Admin Portal</div>
-                
+                <div style="margin-top: 7%; color:maroon"> Register</div>
+
                     <form action="" style="grid; grid-template-columns: 1fr 1fr;  column-gap: 50px;">
-                        <input type="text" name="" id="fullname" placeholder="Fullname">
-                        <input type="text" name="" id="username" placeholder="Username">
-                        <input type="text" name="" id="staffid" placeholder="Staff id">
-                        <input type="password" name="" id="password" placeholder="Password">
+                        <input v-model="user.name" type="text" name="" id="name" placeholder="name">
+                        <input v-model="user.email" type="text" name="" id="email" placeholder="Email">
+                        <input v-model="user.staff_id" type="text" name="" id="staffid" placeholder="Staff id">
+                        <input v-model="user.phone_number" type="number" name="" id="phonenumber" placeholder="Phone Number">
+                        <input v-model="user.password" type="password" name="" id="password" placeholder="Password">
+                        <input v-model="user.password_confirmation" type="text" name="" id="lastname" placeholder="confirm_password">
+
+
+                        <button style="margin-top: 2rem;" class="btnsubmit">Submit</button>
+
                     </form>
 
                 <div style="line-height: 0rem;">
@@ -43,9 +49,30 @@
 
 <script setup>
 
+const user = {
+    name: '',
+    email: '',
+    staff_id: '',
+    phone_number: '',
+    password: '',
+    password_confirmation: '',
+}
+
 </script>
 
 <style scoped>
+
+.btnsubmit{
+    padding: 0.5rem 1rem;
+    border: none;
+    background-color: green;
+    color: white;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.btnsubmit:hover{
+    background-color: rgb(40, 119, 40);
+}
 .homeparent{
     min-height: 100vh;
     min-width: 100vw;
@@ -54,6 +81,7 @@
     justify-content: center;
     align-items: center;
     font-size: 1.2rem;
+    position: fixed;
 }
 
 .homegrid{
