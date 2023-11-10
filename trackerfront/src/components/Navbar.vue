@@ -1,5 +1,5 @@
 <template>
-   <!-- <div class="nav">
+     <div class="nav">
             <button
                 @click="activeLink = AdminLogin"
                 style="margin:0.5rem 1rem; cursor:pointer; width: 8rem"
@@ -19,14 +19,7 @@
                >
                     <h4>Register</h4>
             </button>
-   </div> -->
-
-    <!-- <keep-alive>
-        <component :is="activeLink">
-        </component>
-    </keep-alive> -->
-
-
+   </div>
 </template>
 
 <script setup>
@@ -37,11 +30,9 @@
 
 // const activeLink = shallowRef(AdminLogin);
 
-
 </script>
 
 <style scoped>
-
 .nav{
     width: 100%;
     height: 5rem;
@@ -54,6 +45,4 @@
     background-color: transparent;
     border: none;
 }
-
-
 </style>

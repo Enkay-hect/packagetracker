@@ -13,6 +13,8 @@ const toLocal = new persistState({
   ({
         state: {
           user: {
+            data:{},
+            token: sessionStorage.getItem('TOKEN'),
           },
 
         },
@@ -22,17 +24,34 @@ const toLocal = new persistState({
         },
 
         actions: {
+            signup({commit}, user){
+                commit('setUser', user);
+              },
 
+              login({commit}, user){
+                commit('setUser', user);
+              },
         },
 
-      mutations: {
+        mutations: {
 
-      },
+                logout: (state)=>{
+                    state.user.token = null;
+                    state.user.data = {};
+                },
+                setUser: (state, userData)=>{
+                    state.user.token = userData.token;
+                    state.user.data = userData.user;
+                    sessionStorage.setItem('TOKEN', userData.token);
+                },
+
+        },
 
     plugins:[toLocal.plugin],
 
     modules: {},
 
   })
+
   export default store
 

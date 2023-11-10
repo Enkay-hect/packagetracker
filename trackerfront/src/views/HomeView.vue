@@ -1,4 +1,25 @@
 <template>
+    <div v-if="staff_id" class="nav">
+        <h4>welcome {{ staff_id }}</h4>
+        <h4>Sign out</h4>
+    </div>
+    <div v-else class="nav">
+
+
+            <button>
+                <router-link class="linnks" to="/adminview">
+                    <h4>Login</h4>
+                </router-link>
+            </button>
+
+
+            <button>
+                <router-link class="linnks" to="/adminview">
+                    <h4>Register</h4>
+                </router-link>
+            </button>
+   </div>
+
  <div class="homeparent" style="">
     <div class='homegrid'>
         <div style="line-height: 0rem;">
@@ -31,6 +52,11 @@
 </template>
 
 <script setup>
+import Navbar from '../components/Navbar.vue';
+import { RouterLink } from 'vue-router';
+import store from '../store';
+
+const staff_id = store.state.user.data.staff_id
 
 </script>
 
@@ -80,5 +106,25 @@
     .homegrid{
         width: 85%;
     }
+}
+
+
+.nav{
+    width: 100%;
+    height: 5rem;
+    position: sticky;
+    display: flex;
+    justify-content: center;
+}
+
+.nav button{
+    background-color: transparent;
+    border: none;
+    text-decoration: none;
+}
+
+.linnks{
+    text-decoration: none;
+    color: maroon;
 }
 </style>

@@ -43,7 +43,7 @@ import { useRoute, useRouter, RouterLink } from 'vue-router';
     width: 60%;
     margin: 0 auto;
     min-height: 70vh;
-    border: 2px solid maroon;
+    /* border: 2px solid maroon; */
     display:flex;
     flex-direction: column;
     justify-content: space-evenly;

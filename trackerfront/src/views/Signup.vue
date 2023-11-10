@@ -2,10 +2,27 @@
    <div class="homeparent" style="">
         <div class='homegrid'>
 
-            <!-- <div style="display: flex; justify-content: center; ">
-                <h4 style="margin:0.5rem 1rem; cursor:pointer">Login</h4>
-                <h4 style="margin:0.5rem 1rem; cursor:pointer">Signup</h4>
-            </div> -->
+            <div v-if="staff_id" class="nav">
+                <h4>welcome {{ staff_id }}</h4>
+                <h4>Sign out</h4>
+            </div>
+
+            <div v-else class="nav">
+
+
+                    <button>
+                        <router-link class="linnks" to="/adminview">
+                            <h4>Login</h4>
+                        </router-link>
+                    </button>
+
+
+                    <button>
+                        <router-link class="linnks" to="/adminview">
+                            <h4>Register</h4>
+                        </router-link>
+                    </button>
+            </div>
 
             <div style=";">
                 <div>
@@ -16,15 +33,15 @@
 
                 <div style="margin-top: 7%; color:maroon"> Register</div>
 
-                    <form action="" style="grid; grid-template-columns: 1fr 1fr;  column-gap: 50px;">
+                    <form @submit="signup" style="grid; grid-template-columns: 1fr 1fr;  column-gap: 50px;">
                         <input v-model="user.name" type="text" name="" id="name" placeholder="name">
                         <input v-model="user.email" type="text" name="" id="email" placeholder="Email">
                         <input v-model="user.staff_id" type="text" name="" id="staffid" placeholder="Staff id">
-                        <input v-model="user.phone_number" type="number" name="" id="phonenumber" placeholder="Phone Number">
+                        <input v-model="user.phone_number" type="number" name="" id="phonenumber" placeholder="Phone Number" maxlength="15">
                         <input v-model="user.password" type="password" name="" id="password" placeholder="Password">
-                        <input v-model="user.password_confirmation" type="text" name="" id="lastname" placeholder="confirm_password">
+                        <input v-model="user.password_confirmation" type="password" name="" id="lastname" placeholder="confirm_password">
 
-
+                        <br>
                         <button style="margin-top: 2rem;" class="btnsubmit">Submit</button>
 
                     </form>
@@ -48,6 +65,13 @@
 </template>
 
 <script setup>
+import store from '../store';
+import AuthServices from '../apiServices/authServices'
+import {useRouter} from 'vue-router'
+import {ref} from 'vue'
+
+const router = useRouter();
+
 
 const user = {
     name: '',
@@ -56,6 +80,27 @@ const user = {
     phone_number: '',
     password: '',
     password_confirmation: '',
+}
+const errorMessage = ref('');
+
+
+async function signup(ev){
+    try {
+        ev.preventDefault();
+        await AuthServices.signup(user, (response)=>{
+            store
+            .dispatch('signup', response)
+            .then ((response)=> {
+                router.push({
+                    name:'adminview'
+                })
+            })
+        })
+    } catch (error) {
+        errorMessage.value = error.response.data.message
+        console.log(errorMessage.value)
+    }
+
 }
 
 </script>
