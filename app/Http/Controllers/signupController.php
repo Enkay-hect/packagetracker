@@ -15,10 +15,10 @@ class signupController extends Controller
 
 
 
-        return response([
-            'status' => 'success',
-            'user'   => User::find($createUser->id),
-        ]);
+        // return response([
+        //     'status' => 'success',
+        //     'user'   => User::find($createUser->id),
+        // ]);
     }
 
     public function create(array $data)
@@ -26,7 +26,7 @@ class signupController extends Controller
         return User::create([
             'name' => $data['name'],
             'email'  => $data['email'],
-            'staff_id'     => $data['staff_id'],
+            'staffId'     => $data['staffId'],
             'phone_number'   => $data['phone_number'],
             'password'  => bcrypt($data['password']),
         ]);

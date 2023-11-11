@@ -17,6 +17,8 @@ const toLocal = new persistState({
             token: sessionStorage.getItem('TOKEN'),
           },
 
+          packagedata: [],
+          searchpackage: [],
         },
 
         getters: {
@@ -28,9 +30,18 @@ const toLocal = new persistState({
                 commit('setUser', user);
               },
 
-              login({commit}, user){
-                commit('setUser', user);
-              },
+            login({commit}, user){
+            commit('setUser', user);
+            },
+
+            packagee({commit}, packagedata){
+                commit('setPackage', packagedata)
+            },
+
+
+            getPack({commit}, searchpackage){
+                commit('getPackage', searchpackage)
+            }
         },
 
         mutations: {
@@ -39,11 +50,24 @@ const toLocal = new persistState({
                     state.user.token = null;
                     state.user.data = {};
                 },
+
+                clearpackagedata:(state)=>{
+                    state.packagedata = [];
+                },
+
                 setUser: (state, userData)=>{
                     state.user.token = userData.token;
                     state.user.data = userData.user;
                     sessionStorage.setItem('TOKEN', userData.token);
                 },
+
+                setPackage:(state, payload)=>{
+                    state.packagedata = payload.packagedata;
+                },
+
+                getPackage: (state, payload)=>{
+                    state.searchpackage = payload.searchpackage;
+                }
 
         },
 
@@ -54,4 +78,9 @@ const toLocal = new persistState({
   })
 
   export default store
+
+  console.log(store.state.user.data)
+  console.log(store.state.packagedata)
+  console.log(store.state.searchpackage)
+
 

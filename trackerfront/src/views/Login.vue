@@ -1,34 +1,9 @@
 <template>
+    <loggedInNav />
+
    <div class="homeparent" style="">
         <div class='homegrid'>
 
-            <div>
-                <div v-if="staff_id" class="nav">
-                    <h4>welcome {{ staff_id }}</h4>
-                    <h4>Sign out</h4>
-                </div>
-                <div v-else class="nav">
-
-
-                        <button>
-                            <router-link class="linnks" to="/adminview">
-                                <h4>Login</h4>
-                            </router-link>
-                        </button>
-
-
-                        <button>
-                            <router-link class="linnks" to="/adminview">
-                                <h4>Register</h4>
-                            </router-link>
-                        </button>
-            </div>
-            </div>
-
-            <!-- <div style="display: flex; justify-content: center; ">
-                <h4 style="margin:0.5rem 1rem; cursor:pointer">Login</h4>
-                <h4 style="margin:0.5rem 1rem; cursor:pointer">Signup</h4>
-            </div> -->
 
             <div style=";">
                 <div>
@@ -40,8 +15,8 @@
                 <div style="margin-top: 7%; margin-bottom: 2rem; color:maroon">Login</div>
                 <form @submit="login" style="grid; grid-template-columns: 1fr 1fr;  column-gap: 50px;     margin-bottom: 2rem;
 ">
-                    <input v-model="user.staff_id" type="text" name="" id="staffid" placeholder="staff id">
-                    <input v-model="user.password" type="password" name="" id="pass" placeholder="password">
+                    <input v-model="user.staffId" type="text" name="" id="staffid" placeholder="staff id" required>
+                    <input v-model="user.password" type="password" name="" id="pass" placeholder="password" required>
                     <br>
                     <button style="margin-top: 2rem;" class="btnsubmit">Submit</button>
                 </form>
@@ -65,7 +40,9 @@
 </template>
 
 <script setup>
+import loggedInNav from '../components/loggedInNav.vue';
 import { useRouter } from 'vue-router';
+import { RouterLink } from 'vue-router';
 import { ref } from 'vue';
 import store from '../store';
 import AuthServices from '../apiServices/authServices';
@@ -73,9 +50,12 @@ import AuthServices from '../apiServices/authServices';
 const router = useRouter()
 
 const user ={
-    staff_id: '',
+    staffId: '',
     password: ''
 }
+
+const errorMessage = ref('');
+
 
 async function login(ev){
     try {
@@ -85,12 +65,14 @@ async function login(ev){
             .dispatch('login', response)
             .then((response)=>{
                 router.push({
-                    name: 'home'
+                    name: 'trackpackage'
                 })
             })
         })
 
     } catch (error) {
+        errorMessage.value = error.response.data.message
+        console.log(errorMessage.value)
 
     }
 }

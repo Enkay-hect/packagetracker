@@ -27,7 +27,7 @@ class signuprequest extends FormRequest
         return [
             'name' => 'required',
             'email' => 'required',
-            'staff_id' => 'required',
+            'staffId' => 'required',
             'phone_number' => 'required',
             'password'  => [
                 'required',

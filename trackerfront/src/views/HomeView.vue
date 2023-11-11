@@ -1,50 +1,38 @@
 <template>
-    <div v-if="staff_id" class="nav">
-        <h4>welcome {{ staff_id }}</h4>
-        <h4>Sign out</h4>
-    </div>
-    <div v-else class="nav">
 
-
-            <button>
-                <router-link class="linnks" to="/adminview">
-                    <h4>Login</h4>
-                </router-link>
-            </button>
-
-
-            <button>
-                <router-link class="linnks" to="/adminview">
-                    <h4>Register</h4>
-                </router-link>
-            </button>
-   </div>
 
  <div class="homeparent" style="">
     <div class='homegrid'>
         <div style="line-height: 0rem;">
            <div>
-                <img src="../assets/images/uniuyologo.png" alt="" srcset="">
+                <img src="../assets/images/homeimage.png" alt="" srcset="">
            </div>
 
-            <div style="padding:2rem;">
-                Mail Tracking
-            </div>
         </div>
 
 
 
-      <div style="line-height: 2rem;">
-        <form action="">
-            <input type="search" name="" id="">
-            <button>Search</button>
-        </form>
+      <div class="homeBtn" style="line-height: rem; margin-top: -20%;"  >
+        <button style="background-color: green;">
+            <router-link class="linnks" to="/signup" >
+                <h4>Register</h4>
+            </router-link>
+        </button>
 
-        <div>Track Item</div>
+
+        <button style="background-color: maroon;">
+            <router-link class="linnks" to="/login" >
+                <h4>Login</h4>
+            </router-link>
+        </button>
+
+        <button style="background-color: orange;">
+            <router-link class="linnks" to="/trackpackage" style="background-color: orange;">
+                <h4>Package Info</h4>
+            </router-link>
+        </button>
       </div>
 
-
-        <div>Powered by Uniuyo</div>
 
   </div>
  </div>
@@ -60,7 +48,25 @@ const staff_id = store.state.user.data.staff_id
 
 </script>
 
-<style scoped>
+.<style scoped>
+.linnks{
+    text-decoration: none;
+    color: white;
+}
+.homeBtn{
+    margin: 0 auto;
+    width: 70%;
+    display: flex;
+    justify-content: space-evenly;
+
+}
+.homeBtn button{
+    width: 20%;
+    padding: 0.5rem 0.5rem;
+    /* background-color: white; */
+    border: none;
+
+}
 .homeparent{
     min-height: 100vh;
     min-width: 100vw;
@@ -73,7 +79,7 @@ const staff_id = store.state.user.data.staff_id
 
 .homegrid{
     margin: 0 auto;
-    width: 50%;
+    width: 80%;
 
     min-height: 100vh;
     display: grid;
@@ -98,8 +104,8 @@ const staff_id = store.state.user.data.staff_id
 }
 
 .homegrid img{
-    height: 6rem;
-    width: 8rem;
+    height: 12rem;
+    width: 30rem;
 }
 
 @media (max-width: 700px) {
@@ -125,6 +131,6 @@ const staff_id = store.state.user.data.staff_id
 
 .linnks{
     text-decoration: none;
-    color: maroon;
+    /* color: maroon; */
 }
 </style>

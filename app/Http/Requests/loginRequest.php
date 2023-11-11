@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Validation\ValidationException;
+use Illuminate\Validation\Validator;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Cache\RateLimiter;
 use Illuminate\Support\Str;
@@ -27,7 +28,8 @@ class loginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'staff_id'    => ['required', 'string', 'staff_id'],
+            // 'staff_id'    => 'required|string|exist:users,staff_id',
+            'staffId'    => ['required', 'string', 'staffId'],
             'password' => ['required', 'string'],
             'remember' => 'boolean',
         ];
@@ -44,7 +46,7 @@ class loginRequest extends FormRequest
 
 
 
-        if (!Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
+        if (!Auth::attempt($this->only('staff_id', 'password'), $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
@@ -73,7 +75,7 @@ class loginRequest extends FormRequest
         $seconds = RateLimiter::availableIn($this->throttleKey());
 
         throw ValidationException::withMessages([
-            'email' => trans('auth.throttle', [
+            'staff_id' => trans('auth.throttle', [
                 'seconds' => $seconds,
                 'minutes' => ceil($seconds / 60),
             ]),
@@ -85,7 +87,7 @@ class loginRequest extends FormRequest
      */
     public function throttleKey(): string
     {
-        return Str::transliterate(Str::lower($this->input('email')) . '|' . $this->ip());
+        return Str::transliterate(Str::lower($this->input('staff_id')) . '|' . $this->ip());
     }
 }
 

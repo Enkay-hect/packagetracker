@@ -1,28 +1,10 @@
 <template>
+    <loggedInNav />
+
    <div class="homeparent" style="">
         <div class='homegrid'>
 
-            <div v-if="staff_id" class="nav">
-                <h4>welcome {{ staff_id }}</h4>
-                <h4>Sign out</h4>
-            </div>
 
-            <div v-else class="nav">
-
-
-                    <button>
-                        <router-link class="linnks" to="/adminview">
-                            <h4>Login</h4>
-                        </router-link>
-                    </button>
-
-
-                    <button>
-                        <router-link class="linnks" to="/adminview">
-                            <h4>Register</h4>
-                        </router-link>
-                    </button>
-            </div>
 
             <div style=";">
                 <div>
@@ -34,12 +16,12 @@
                 <div style="margin-top: 7%; color:maroon"> Register</div>
 
                     <form @submit="signup" style="grid; grid-template-columns: 1fr 1fr;  column-gap: 50px;">
-                        <input v-model="user.name" type="text" name="" id="name" placeholder="name">
-                        <input v-model="user.email" type="text" name="" id="email" placeholder="Email">
-                        <input v-model="user.staff_id" type="text" name="" id="staffid" placeholder="Staff id">
-                        <input v-model="user.phone_number" type="number" name="" id="phonenumber" placeholder="Phone Number" maxlength="15">
-                        <input v-model="user.password" type="password" name="" id="password" placeholder="Password">
-                        <input v-model="user.password_confirmation" type="password" name="" id="lastname" placeholder="confirm_password">
+                        <input v-model="user.name" type="text" name="" id="name" placeholder="name" required>
+                        <input v-model="user.email" type="text" name="" id="email" placeholder="Email" required>
+                        <input v-model="user.staffId" type="text" name="" id="staffId" placeholder="Staff id" required >
+                        <input v-model="user.phone_number" type="number" name="" id="phonenumber" placeholder="Phone Number" maxlength="15" required>
+                        <input v-model="user.password" type="password" name="" id="password" placeholder="Password" required>
+                        <input v-model="user.password_confirmation" type="password" name="" id="lastname" placeholder="confirm_password" required>
 
                         <br>
                         <button style="margin-top: 2rem;" class="btnsubmit">Submit</button>
@@ -65,6 +47,8 @@
 </template>
 
 <script setup>
+
+import loggedInNav from '../components/loggedInNav.vue';
 import store from '../store';
 import AuthServices from '../apiServices/authServices'
 import {useRouter} from 'vue-router'
@@ -76,7 +60,7 @@ const router = useRouter();
 const user = {
     name: '',
     email: '',
-    staff_id: '',
+    staffId: '',
     phone_number: '',
     password: '',
     password_confirmation: '',
@@ -92,7 +76,7 @@ async function signup(ev){
             .dispatch('signup', response)
             .then ((response)=> {
                 router.push({
-                    name:'adminview'
+                    name:'login'
                 })
             })
         })

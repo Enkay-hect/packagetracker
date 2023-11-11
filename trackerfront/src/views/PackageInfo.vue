@@ -15,23 +15,61 @@
 
                     <h4 style="text-align: center;">Enter Package Information</h4>
 
-                    <form class="foorm" action="" style="display:flex; flex-direction: column; justify-content: center;">
-                        <input type="text" name="" id="fullname" placeholder="Package Name">
-                        <input type="text" name="" id="username" placeholder="Phone Number">
-                        <input type="text" name="" id="staffid" placeholder="Destination">                    </form>
+                    <form @submit="packagedataa" class="foorm" action="" style="display:flex; flex-direction: column; justify-content: center;">
+                        <input v-model="packagedata.name" type="text" name="" id="fullname" placeholder="Sender Name" required>
+                        <input v-model="packagedata.email" type="text" name="" id="Email" placeholder="Email" required>
+                        <input v-model="packagedata.phone_number" type="text" name="" id="username" placeholder="Phone Number" required>
+                        <input v-model="packagedata.destination" type="text" name="" id="staffid" placeholder="Destination" required>
+
                         <button style="margin-top: 1.5rem;" class="btnsubmit">Submit</button>
 
+                    </form>
                 </div>
-
-
             </div>
-
         </div>
     </div>
 
 </template>
 
 <script setup>
+import store from '../store';
+import AuthServices from '../apiServices/authServices';
+
+import { useRouter } from 'vue-router';
+import { ref } from 'vue';
+
+const router = useRouter();
+
+
+const packagedata = {
+    name: '',
+    email: '',
+    phone_number: '',
+    destination: '',
+    sender_id: store.state.user.data.staffId
+}
+
+
+const errorMessage = ref('')
+
+async function packagedataa(ev){
+    try {
+        ev.preventDefault();
+        await AuthServices.packagdata(packagedata, (response)=>{
+            store
+            .dispatch('packagee', response)
+            .then ((response)=> {
+                router.push({
+                    // name:'adminview'
+                })
+            })
+        })
+    } catch (error) {
+        errorMessage.value = error.response.data.message
+        console.log(error)
+    }
+
+}
 
 </script>
 
@@ -42,6 +80,7 @@
     background-color: green;
     color: white;
     font-family: Georgia, 'Times New Roman', Times, serif;
+    border-radius: 5px;
 }
 
 .btnsubmit:hover{

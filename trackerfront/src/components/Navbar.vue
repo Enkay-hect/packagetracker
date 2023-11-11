@@ -1,34 +1,43 @@
 <template>
-     <div class="nav">
-            <button
-                @click="activeLink = AdminLogin"
-                style="margin:0.5rem 1rem; cursor:pointer; width: 8rem"
-                :style="{
-                    color:activeLink==AdminLogin ? 'green':'black'
-                }">
-                    <h4>Login</h4>
-            </button>
+         <div>
+                <div v-if="staff_id" class="nav">
+                    <h4>welcome {{ staff_id }}</h4>
+                    <h4>Sign out</h4>
+                </div>
+                <div v-else class="nav">
 
 
-            <button
-                @click="activeLink = AdminSignup"
-                style="margin:0.5rem 1rem; cursor:pointer; width: 8rem"
-                :style="{
-                    color:activeLink==AdminSignup ? 'green':'black'
-                }"
-               >
-                    <h4>Register</h4>
-            </button>
-   </div>
+                        <button>
+                            <router-link class="linnks" to="/login">
+                                <h4>Login</h4>
+                            </router-link>
+                        </button>
+
+
+                        <button>
+                            <router-link class="linnks" to="/signup">
+                                <h4>Register</h4>
+                            </router-link>
+                        </button>
+                </div>
+            </div>
 </template>
 
 <script setup>
-// import AdminLogin from '../components/AdminLogin.vue';
-// import AdminSignup from '../components/AdminSignup.vue';
+import store from '../store';
+import { useRouter, RouterLink } from 'vue-router';
 
-// import { shallowRef, ref } from 'vue';
+import { ref } from 'vue';
 
-// const activeLink = shallowRef(AdminLogin);
+const staff_id = store.state.user.data.staffId
+
+    function logout(){
+        store.commit("logout");
+        router.push({
+            name: 'login',
+        });
+    }
+
 
 </script>
 

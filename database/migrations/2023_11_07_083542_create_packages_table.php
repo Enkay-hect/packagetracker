@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('package', function (Blueprint $table) {
+        Schema::create('packages', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('email');
             $table->string('package_id')->unique();
-            $table->string('has_stop')->default(false);
-            $table->integer('phone_number');
+            $table->bigInteger('phone_number');
             $table->string('destination');
+            $table->string('sender_id');
             $table->timestamps();
         });
     }

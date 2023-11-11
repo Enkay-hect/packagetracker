@@ -13,6 +13,20 @@ const AuthServices = {
         .then(({data})=> {
             callback(data)
         })
+    },
+
+    packagdata : async (packageDetails, callback = (data)=>{})=>{
+        await axiosClient.post('/createdata', packageDetails)
+        .then(({data})=> {
+            callback(data)
+        })
+    },
+
+    serpack: async(packageData, callback = (data)=>{})=>{
+        await axiosClient.post('/getpackagedata', packageData)
+        .then(({data})=>{
+            callback(data)
+        })
     }
 }
 
