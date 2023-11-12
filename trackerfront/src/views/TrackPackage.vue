@@ -1,13 +1,6 @@
 <template>
 <div class="display: flex; flex-direction:column;">
 
-
-            <!-- <div id="infocontainer" >
-                <img class="xx" @click="closee()"  src="../assets/images/circle-xmark-solid.svg" alt="">
-                <PackageStatus />
-
-            </div> -->
-
             <div style="width: 100%; position: fixed">
                 <loggedInNav/>
             </div>

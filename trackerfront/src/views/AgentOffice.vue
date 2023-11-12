@@ -50,7 +50,7 @@ import { useRoute, useRouter, RouterLink } from 'vue-router';
 import AuthServices from '../apiServices/authServices';
 import store from '../store/index.js';
 import { ref, onMounted } from 'vue';
-import loggedInNav from '../components/loggedinnav.vue'
+import loggedInNav from '../components/loggedInNav.vue'
 
 
 const router = useRouter();
@@ -76,7 +76,6 @@ const errorMessage = ref('')
 function agentOffice(ev){
     ev.preventDefault()
     document.getElementById('show').style.display='flex'
-
 }
 
 async function newDes(ev){
@@ -102,7 +101,7 @@ async function newDes(ev){
 
 
 async function getPack(ev){
-    ev.preventDefault();
+    // ev.preventDefault();
 
     try {
         await AuthServices.serpack(pack, (response)=>

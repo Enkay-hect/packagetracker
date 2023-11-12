@@ -9,6 +9,9 @@
             <div style="margin 0 2rem">
                 <router-link class="sendn" to="/packageinfo">Send new mail</router-link>
             </div>
+            <div style="margin 0 2rem">
+                <router-link class="sendn" to="/agent&destination">Receive Mail</router-link>
+            </div>
             <a @click="logout()" :style="{cursor: 'pointer', color:'maroon'}">Sign out</a >
         </div>
 

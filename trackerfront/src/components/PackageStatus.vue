@@ -141,12 +141,21 @@ const created_at = store.state.searchpackage.created_at
 #infocontainer img{
     min-height: 2rem;
     width: 2rem;
-    margin-right: 40rem;
+    margin-right: 35rem;
 }
 
-    @media (max-width: 750px) {
-        #infocontainer img{
-        margin-right: 6rem;
+    @media (max-width: 1538px) {
+        #infocontainer img
+    {
+        margin-right: 12rem;
+    }
+
+}
+
+@media (max-width: 800px) {
+        #infocontainer img
+    {
+        margin-right: 3rem;
     }
 }
 .mapApi{
