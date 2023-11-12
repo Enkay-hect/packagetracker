@@ -1,4 +1,10 @@
 <template>
+     <!-- <div id="infocontainer" >
+            <div class="xx" @click="closee()">X</div>
+    </div> -->
+    <successModal id="modal" @click="closee()" style="display: none;"/>
+    <loggedInNav id="unfix"/>
+
     <div class="homeparent" >
         <div class='homegrid'>
 
@@ -19,7 +25,10 @@
                         <input v-model="packagedata.name" type="text" name="" id="fullname" placeholder="Sender Name" required>
                         <input v-model="packagedata.email" type="text" name="" id="Email" placeholder="Email" required>
                         <input v-model="packagedata.phone_number" type="text" name="" id="username" placeholder="Phone Number" required>
-                        <input v-model="packagedata.destination" type="text" name="" id="staffid" placeholder="Destination" required>
+                        <input v-model="packagedata.postoffice" type="text" name="" id="" placeholder="Posting office" required>
+                        <input v-model="packagedata.destination" type="text" name="" id="" placeholder="Destination" required>
+                        <input v-model="packagedata.staffId" type="text" name="" id=""  disabled :placeholder="store.state.user.data.staffId">
+
 
                         <button style="margin-top: 1.5rem;" class="btnsubmit">Submit</button>
 
@@ -34,6 +43,8 @@
 <script setup>
 import store from '../store';
 import AuthServices from '../apiServices/authServices';
+import loggedInNav from '../components/loggedInNav.vue';
+import successModal from '../components/successModal.vue';
 
 import { useRouter } from 'vue-router';
 import { ref } from 'vue';
@@ -45,8 +56,19 @@ const packagedata = {
     name: '',
     email: '',
     phone_number: '',
-    destination: '',
+    postoffice: '',
     sender_id: store.state.user.data.staffId
+}
+
+function closee(){
+    document.getElementById('modal').style.display = 'none'
+    document.getElementById('unfix').style.display = 'flex'
+
+    store.commit("clearsearchpackage");
+
+                router.push({
+                    name:'trackpackage'
+                })
 }
 
 
@@ -59,9 +81,9 @@ async function packagedataa(ev){
             store
             .dispatch('packagee', response)
             .then ((response)=> {
-                router.push({
-                    // name:'adminview'
-                })
+                document.getElementById('unfix').style.display = 'none'
+
+                document.getElementById('modal').style.display = 'flex'
             })
         })
     } catch (error) {
@@ -74,6 +96,8 @@ async function packagedataa(ev){
 </script>
 
 <style scoped>
+
+
 .btnsubmit{
     padding: 0.5rem 1rem;
     border: none;
@@ -97,7 +121,7 @@ async function packagedataa(ev){
 
 .homeparent{
     width: 10%;
-    min-height: 100vh;
+    min-height: 65vh;
     min-width: 100vw;
     /* width: 100%; */
     display:flex;
@@ -109,7 +133,7 @@ async function packagedataa(ev){
 .homegrid{
     margin: 0 auto;
     width: 80%;
-    min-height: 100vh;
+    min-height: 50vh;
     display: grid;
     /* grid-template-columns: 1fr 1fr; */
     align-items: center;

@@ -1,43 +1,60 @@
 <template>
-<loggedInNav />
+<div class="display: flex; flex-direction:column;">
 
- <div class="homeparent" style="">
-    <div class='homegrid'>
-        <div style="line-height: 0rem;">
-           <div>
-                <img src="../assets/images/uniuyologo.png" alt="" srcset="">
-           </div>
 
-            <div style="padding:2rem;">
-                Mail Tracking
+            <!-- <div id="infocontainer" >
+                <img class="xx" @click="closee()"  src="../assets/images/circle-xmark-solid.svg" alt="">
+                <PackageStatus />
+
+            </div> -->
+
+            <div style="width: 100%; position: fixed">
+                <loggedInNav/>
             </div>
-        </div>
+
+            <div class="homeparent" style="">
+                <div class='homegrid'>
+                    <div style="line-height: 0rem;">
+                    <div>
+                            <img src="../assets/images/uniuyologo.png" alt="" srcset="">
+                    </div>
+
+                        <div style="padding:2rem;">
+                            Mail Tracking
+                        </div>
+                    </div>
 
 
 
-      <div style="line-height: 2rem;">
-        <form @submit="getPack" action="">
-            <input v-model="pack.package_id" type="search" name="" id="" required>
-            <button>Search</button>
-        </form>
+                <div style="line-height: 2rem;">
+                    <form @submit="getPack" action="">
+                        <input v-model="pack.package_id" type="search" name="" id="" required>
+                        <button>Search</button>
+                    </form>
 
-        <div>Track Item</div>
-      </div>
+                    <div>Track Item</div>
+                </div>
 
 
-        <div>Powered by Uniuyo</div>
+                    <div>Powered by Uniuyo</div>
 
-  </div>
- </div>
+            </div>
+            </div>
+
+</div>
 
 </template>
 
 <script setup>
+import PackageStatus from '../components/PackageStatus.vue';
 import loggedInNav from '../components/loggedInNav.vue';
+// import loggedInNav from '../components/loggedInNav.vue';
 import AuthServices from '../apiServices/authServices';
 import store from '../store/index.js';
 import { useRouter } from 'vue-router';
 import { ref } from 'vue';
+
+
 
 const router = useRouter();
 
@@ -45,23 +62,31 @@ const pack = {
     package_id: ''
 }
 
-const error = ref('')
+const errorMessage = ref('')
+
+
+
+
+
 
 async function getPack(ev){
     ev.preventDefault();
 
     try {
-        await AuthServices.serpack(pack, (response)=>{
+        await AuthServices.serpack(pack, (response)=>
+        {
             store
             .dispatch('getPack', response)
             .then((response)=>{
                 router.push({
-                    name: 'packagedetails'
+                    name: 'packagestatus'
                 })
             })
-         })
-    } catch (error) {
+        })
 
+    } catch (error) {
+        errorMessage.value = error.response.data.message
+        alert(errorMessage.value)
     }
 
 }
@@ -69,6 +94,27 @@ async function getPack(ev){
 </script>
 
 <style scoped>
+
+.xx{
+    text-align: right;
+    /* align-self: right; */
+    margin-left: 85%;
+    cursor:pointer;
+    margin-top: 3%;
+    font-weight: bold;
+    position: fixed;
+    height: 3rem;
+    width: 6rem;
+}
+
+#infocontainer{
+    min-height: 100vh;
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+    display: none;
+    background-color: rgb(250, 240, 240);
+}
 .homeparent{
     min-height: 100vh;
     min-width: 100vw;

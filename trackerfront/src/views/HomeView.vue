@@ -44,7 +44,7 @@ import Navbar from '../components/Navbar.vue';
 import { RouterLink } from 'vue-router';
 import store from '../store';
 
-const staff_id = store.state.user.data.staff_id
+// const staff_id = store.state.user.data.staff_id
 
 </script>
 

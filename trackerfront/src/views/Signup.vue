@@ -1,5 +1,21 @@
 <template>
-    <loggedInNav />
+    <!-- <loggedInNav /> -->
+
+
+    <div  class="nav">
+            <button>
+                <router-link class="linnks" to="/login">
+                    <h4>Login</h4>
+                </router-link>
+            </button>
+
+
+            <button>
+                <router-link class="linnks" to="/signup">
+                    <h4>Register</h4>
+                </router-link>
+            </button>
+        </div>
 
    <div class="homeparent" style="">
         <div class='homegrid'>
@@ -19,7 +35,7 @@
                         <input v-model="user.name" type="text" name="" id="name" placeholder="name" required>
                         <input v-model="user.email" type="text" name="" id="email" placeholder="Email" required>
                         <input v-model="user.staffId" type="text" name="" id="staffId" placeholder="Staff id" required >
-                        <input v-model="user.phone_number" type="number" name="" id="phonenumber" placeholder="Phone Number" maxlength="15" required>
+                        <input v-model="user.phone_number" type="tel" name="" id="phonenumber" placeholder="Phone Number" maxlength="15" required>
                         <input v-model="user.password" type="password" name="" id="password" placeholder="Password" required>
                         <input v-model="user.password_confirmation" type="password" name="" id="lastname" placeholder="confirm_password" required>
 
@@ -52,7 +68,9 @@ import loggedInNav from '../components/loggedInNav.vue';
 import store from '../store';
 import AuthServices from '../apiServices/authServices'
 import {useRouter} from 'vue-router'
-import {ref} from 'vue'
+import {ref, onUpdated} from 'vue'
+
+
 
 const router = useRouter();
 
@@ -76,13 +94,14 @@ async function signup(ev){
             .dispatch('signup', response)
             .then ((response)=> {
                 router.push({
-                    name:'login'
+                    name:'trackpackage'
                 })
             })
         })
+        // alert('Registration successful')
     } catch (error) {
         errorMessage.value = error.response.data.message
-        console.log(errorMessage.value)
+        alert(errorMessage.value)
     }
 
 }
@@ -144,6 +163,40 @@ async function signup(ev){
     .homegrid{
         width: 90%;
     }
+}
+
+
+.nav{
+    margin: 0 auto ;
+    width: 80%;
+    height: 5rem;
+    position: sticky;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 0.5rem 1rem;
+}
+
+.nav button{
+    background-color: transparent;
+    border: none;
+    text-decoration: none;
+}
+
+
+.linnks{
+    text-decoration: none;
+    color: maroon;
+}
+
+.navheader{
+     position: fixed;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    /* background-color: gray; */
 }
 
 </style>

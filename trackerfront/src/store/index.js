@@ -19,6 +19,7 @@ const toLocal = new persistState({
 
           packagedata: [],
           searchpackage: [],
+          createmail:[]
         },
 
         getters: {
@@ -26,9 +27,13 @@ const toLocal = new persistState({
         },
 
         actions: {
-            signup({commit}, user){
-                commit('setUser', user);
-              },
+            // signup({commit}, user){
+            //     commit('setUser', user);
+            //   },
+
+            signup(){
+                alert('Registration successful')
+            },
 
             login({commit}, user){
             commit('setUser', user);
@@ -41,7 +46,22 @@ const toLocal = new persistState({
 
             getPack({commit}, searchpackage){
                 commit('getPackage', searchpackage)
+            },
+
+            setdes(){
+                alert('Success! Destination reached')
+            },
+            newDesData(){
+                alert('Success! Detination updated')
             }
+
+            // setdes({commit}, createmail){
+            //     commit('createPackage', createmail)
+            // },
+            // newDesData({commit}, sdaf){
+            //     commit('qwrwe', reqr)
+            // }
+
         },
 
         mutations: {
@@ -53,6 +73,8 @@ const toLocal = new persistState({
 
                 clearpackagedata:(state)=>{
                     state.packagedata = [];
+                    state.searchpackage = {};
+                    state.createmail={};
                 },
 
                 setUser: (state, userData)=>{
@@ -67,7 +89,16 @@ const toLocal = new persistState({
 
                 getPackage: (state, payload)=>{
                     state.searchpackage = payload.searchpackage;
-                }
+                },
+
+                createPackage: (state, payload)=>{
+                    state.createmail = payload.createmail;
+                },
+
+
+                clearsearchpackage: (state)=>{
+                    state.searchpackage = {};
+                  },
 
         },
 
@@ -82,5 +113,6 @@ const toLocal = new persistState({
   console.log(store.state.user.data)
   console.log(store.state.packagedata)
   console.log(store.state.searchpackage)
+//   console.log(store.state.createmail)
 
 

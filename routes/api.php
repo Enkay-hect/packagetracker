@@ -26,3 +26,5 @@ Route::post('/login', [loginController::class, 'signIn'])->name('signIn');
 Route::post('/createdata', [packageController::class, 'createdata'])->name('createdata');
 
 Route::post('/getpackagedata', [packageController::class, 'getpackagedata'])->name('getpackagedata');
+Route::post('/updatefinaldestination', [packageController::class, 'updatefinaldestination'])->name('updatefinaldestination');
+Route::post('/updatenewdestination', [packageController::class, 'updatenewdestination'])->name('updatenewdestination');

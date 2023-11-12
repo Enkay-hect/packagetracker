@@ -1,5 +1,22 @@
 <template>
-    <loggedInNav />
+    <!-- <loggedInNav /> -->
+
+    <div  class="nav">
+            <button>
+                <router-link class="linnks" to="/login">
+                    <h4>Login</h4>
+                </router-link>
+            </button>
+
+
+            <button>
+                <router-link class="linnks" to="/signup">
+                    <h4>Register</h4>
+                </router-link>
+            </button>
+    </div>
+
+
 
    <div class="homeparent" style="">
         <div class='homegrid'>
@@ -71,8 +88,8 @@ async function login(ev){
         })
 
     } catch (error) {
-        errorMessage.value = error.response.data.message
-        console.log(errorMessage.value)
+        // errorMessage.value = error.response.data.message
+        alert('invalid credentials')
 
     }
 }
@@ -134,6 +151,40 @@ async function login(ev){
     .homegrid{
         width: 90%;
     }
+}
+
+
+.nav{
+    margin: 0 auto ;
+    width: 80%;
+    height: 5rem;
+    position: sticky;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 0.5rem 1rem;
+}
+
+.nav button{
+    background-color: transparent;
+    border: none;
+    text-decoration: none;
+}
+
+
+.linnks{
+    text-decoration: none;
+    color: maroon;
+}
+
+.navheader{
+     position: fixed;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    /* background-color: gray; */
 }
 
 </style>

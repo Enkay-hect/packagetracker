@@ -14,7 +14,9 @@ class Package extends Model
         'package_id',
         'email',
         'phone_number',
+        'postoffice',
         'destination',
+        'final_destination',
         'sender_id',
     ];
 }

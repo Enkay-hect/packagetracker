@@ -6,59 +6,55 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
-      name: 'home',
-      component: HomeView
+        path: '/',
+        name: 'home',
+        component: HomeView
     },
-    {
-     path: '/packagedetails',
-      name: 'packagedetails',
 
-      component: () => import('../views/PackageDetails.vue')
-    },
     {
-        path: '/adminview',
-         name: 'adminview',
-
-         component: () => import('../views/AdminView.vue')
-         // meta: {requiresAuth: true},
-    },
-    {
-        path: '/login',
+         path: '/login',
          name: 'login',
-
          component: () => import('../views/Login.vue')
-         // meta: {requiresAuth: true},
     },
     {
         path: '/signup',
-         name: 'signup',
-
-         component: () => import('../views/Signup.vue')
-         // meta: {requiresAuth: true},
+        name: 'signup',
+        component: () => import('../views/Signup.vue')
 
     },
     {
         path: '/trackpackage',
-         name: 'trackpackage',
+        name: 'trackpackage',
+        component: () => import('../views/TrackPackage.vue')
+         // meta: {requiresAuth: true},
 
-         component: () => import('../views/TrackPackage.vue')
+    },
+    {
+        path: '/packagestatus',
+        name: 'packagestatus',
+        component: () => import('../components/PackageStatus.vue')
          // meta: {requiresAuth: true},
 
     },
     {
         path: '/packageinfo',
-         name: 'packageinfo',
-
-         component: () => import('../views/PackageInfo.vue')
-        // meta: {requiresAuth: true},
-
+        name: 'packageinfo',
+        component: () => import('../views/PackageInfo.vue'),
+        meta: {requiresAuth: true},
     },
     {
         path: '/agent&destination',
-         name: 'agent&destination',
-         component: () => import('../views/AgentOffice.vue')
+        name: 'agent&destination',
+        component: () => import('../views/AgentOffice.vue'),
+        meta: {requiresAuth: true},
+
     },
+    
+    // {
+    //     path: '/successmodal',
+    //     name: '/successmodal',
+    //     component:()=> import('../components/successModal.vue')
+    // }
   ]
 })
 
@@ -66,14 +62,20 @@ router.beforeEach((to, from, next)=>{
 
     if(to.meta.requiresAuth && !store.state.user.token){
         next({name: 'home'})
-    }else if(store.state.user.token && to.name ===  'signup') {
-        next ({name: 'trackpakage'})
+    }
+    else if(store.state.user.token  && to.name ===  'signup') {
+        next ({name: 'trackpackage'})
     } else if(store.state.user.token && to.name === 'login') {
         next({name: 'trackpackage'})
-    } else {
+    }
+    else if(store.state.user.token && to.name === 'home') {
+        next({name: 'trackpackage'})
+    }else {
         next()
     };
 } )
 
 export default router
+
+// console.log(store.state.user.token)
 

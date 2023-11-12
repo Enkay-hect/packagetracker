@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Package;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+// use DB;
 use Illuminate\Support\Str;
 
 
@@ -19,9 +21,11 @@ class packageController extends Controller
         $request->validate([
             'name' => 'required',
             'phone_number' => 'required',
+            'postoffice' => 'required',
             'destination' => 'required',
             'sender_id' => 'required',
-            'email' => 'required|email|unique:users',
+            'email' => 'required',
+            //|email|unique:users
         ]);
 
         $data = $request->post();
@@ -46,6 +50,7 @@ class packageController extends Controller
                 'package_id' => Str::upper(Str::random(6)),
                 'phone_number' => $data['phone_number'],
                 'email' => $data['email'],
+                'postoffice' => $data['postoffice'],
                 'destination' => $data['destination'],
                 'sender_id' => $data['sender_id'],
             ]);
@@ -59,53 +64,53 @@ class packageController extends Controller
      */
     public function generateUniqueNumber()
     {
-        // do {
-
                 $package_id = Str::upper(Str::random(6));
-            // }      while (Package::where("package_id", "=", $package_id)->first());
-
             return $package_id;
 
     }
 
     public function getpackagedata(Request $request){
-        $data = $request->only('package_id');
+        $data = $request->only("package_id");
 
-        // $users = App\Models\Package::select('id', 'name')->get();
+        // $data = $request->validated();
+        if($details = Package::where(['package_id'=>$data['package_id']])->first()){
+                return response([
+                    'searchpackage' => $details
+                ]);
 
-        if($details = Package::where(['package_id' => $data['package_id']])->first()){
-            // $detail = $details->packinfo;
-
+        } else if(!$details = Package::where(['package_id'=>$data['package_id']])->first()){
             return response([
-                'searchpackage' => $details
-            ]);
-        }
-        else {
-            return response([
-               'invalid tracking id'
-            ]);
+                'message'=>'invalid tracking id'
+             ], 422);
         }
     }
 
-    public function updatepackage(Request $request){
+
+    public function updatefinaldestination(Request $request){
         $data = $request->only('package_id');
 
-        // $users = App\Models\Package::select('id', 'name')->get();
-
-        if($details = Package::where(['package_id' => $data['package_id']])->first()){
-            // $detail = $details->packinfo;
-
-            return response([
-                'searchpackage' => $details
-            ]);
+        if($details = Package::where(['package_id'=>$data['package_id']])->first()){
+            $change = Package::find($details)->first();
+            $change->final_destination = 1;
+            $change->update();
         }
-        else {
-            return response([
-               'invalid tracking id'
-            ]);
-        }
+
     }
 
+
+    public function updatenewdestination(Request $request){
+        $data = $request->only('package_id', 'staffId', 'newdestination');
+
+        if($details = Package::where(['package_id'=>$data['package_id']])->first()){
+
+            $change = Package::find($details)->first();
+            $change->destination = $data['newdestination'];
+            $change->sender_id = $data['staffId'];
+            // $change->package_id = $data['package_id'];
+            $change->update();
+        }
+
+    }
 
 
 }

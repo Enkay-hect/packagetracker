@@ -17,7 +17,9 @@ return new class extends Migration
             $table->string('email');
             $table->string('package_id')->unique();
             $table->bigInteger('phone_number');
+            $table->string('postoffice');
             $table->string('destination');
+            $table->string('final_destination')->default(false);
             $table->string('sender_id');
             $table->timestamps();
         });

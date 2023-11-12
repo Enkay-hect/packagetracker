@@ -27,7 +27,22 @@ const AuthServices = {
         .then(({data})=>{
             callback(data)
         })
-    }
+    },
+
+    finaldestination: async(finaldestinationData, callback = (data)=>{})=>{
+        await axiosClient.post('/updatefinaldestination', finaldestinationData)
+        .then(({data})=>{
+            callback(data)
+        })
+    },
+
+    newDestination: async(newdestinationData, callback = (data)=>{})=>{
+        await axiosClient.post('/updatenewdestination', newdestinationData)
+        .then(({data})=>{
+            callback(data)
+        })
+    },
+
 }
 
 
