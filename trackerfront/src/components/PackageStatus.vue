@@ -23,7 +23,7 @@
             </div>
 
         <div class="mapApi">
-            <div>Name: {{ store.state.searchpackage.name }}</div>
+            <div>Mail Name: {{ store.state.searchpackage.name }}</div>
             <div>Mail ID: {{ store.state.searchpackage.package_id }}</div>
             <!-- <div>{{ store.state.searchpackage.destination }}</div> -->
         </div>

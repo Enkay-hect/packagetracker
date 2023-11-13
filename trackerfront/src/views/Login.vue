@@ -2,6 +2,12 @@
     <!-- <loggedInNav /> -->
 
     <div  class="nav">
+        <button>
+                <router-link class="linnks" to="/">
+                    <h4>Home</h4>
+                </router-link>
+            </button>
+
             <button>
                 <router-link class="linnks" to="/login">
                     <h4>Login</h4>

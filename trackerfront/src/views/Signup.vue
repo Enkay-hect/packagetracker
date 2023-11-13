@@ -3,6 +3,12 @@
 
 
     <div  class="nav">
+        <button>
+                <router-link class="linnks" to="/">
+                    <h4>Home</h4>
+                </router-link>
+            </button>
+
             <button>
                 <router-link class="linnks" to="/login">
                     <h4>Login</h4>
@@ -67,7 +73,7 @@
 import loggedInNav from '../components/loggedInNav.vue';
 import store from '../store';
 import AuthServices from '../apiServices/authServices'
-import {useRouter} from 'vue-router'
+import {useRouter, RouterLink} from 'vue-router'
 import {ref, onUpdated} from 'vue'
 
 

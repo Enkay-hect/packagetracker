@@ -19,14 +19,14 @@
 
         <div v-else class="nav">
             <button>
-                <router-link class="linnks" to="/login">
+                <router-link class=" sendn" to="/login">
                     <h4>Login</h4>
                 </router-link>
             </button>
 
 
             <button>
-                <router-link class="linnks" to="/signup">
+                <router-link class=" sendn" to="/signup">
                     <h4>Register</h4>
                 </router-link>
             </button>
