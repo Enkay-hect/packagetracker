@@ -9,28 +9,29 @@
         <div class='homegrid'>
 
             <div class="packinfo" style="">
-                        <div>
+                        <div class="imgg">
                             <div class="divplaceholder" style="height: 3rem;"></div>
                             <img src="../assets/images/uniuyologo.png" alt="" srcset="">
-                            <div>Package Information  <br>Admin name <br>Staff id </div>
+                            <div>Enter Mail Details  <br>{{store.state.user.data.name}} <br>{{store.state.user.data.staffId}} </div>
 
                         </div>
                         <!-- <h4>University of Uyo <br>Tracking sytem</h4> -->
 
-                <div style="margin-top: 7%; display: flex; flex-direction: column; align-items: center;">
+                <div style="margin-top: 7%; display: grid; flex-direction: column; align-items: center; justify-content: space-evenly;">
 
                     <h4 style="text-align: center;">Enter Package Information</h4>
 
-                    <form @submit="packagedataa" class="foorm" action="" style="display:flex; flex-direction: column; justify-content: center;">
-                        <input v-model="packagedata.name" type="text" name="" id="fullname" placeholder="Sender Name" required>
-                        <input v-model="packagedata.email" type="text" name="" id="Email" placeholder="Email" required>
-                        <input v-model="packagedata.phone_number" type="text" name="" id="username" placeholder="Phone Number" required>
-                        <input v-model="packagedata.postoffice" type="text" name="" id="" placeholder="Posting office" required>
-                        <input v-model="packagedata.destination" type="text" name="" id="" placeholder="Destination" required>
-                        <input v-model="packagedata.staffId" type="text" name="" id=""  disabled :placeholder="store.state.user.data.staffId">
+                    <form @submit="packagedataa" class="foorm" action="" >
+                       <div>
+                            <input v-model="packagedata.name" type="text" name="" id="fullname" placeholder="Sender Name" required>
+                            <input v-model="packagedata.email" type="text" name="" id="Email" placeholder="Email" required>
+                            <input v-model="packagedata.phone_number" type="text" name="" id="username" placeholder="Phone Number" required>
+                            <input v-model="packagedata.postoffice" type="text" name="" id="" placeholder="Posting office" required>
+                            <input v-model="packagedata.destination" type="text" name="" id="" placeholder="Destination" required>
+                            <!-- <input v-model="packagedata.staffId" type="text" name="" id=""  disabled :placeholder="store.state.user.data.staffId"> -->
 
-
-                        <button style="margin-top: 1.5rem;" class="btnsubmit">Submit</button>
+                       </div>
+                        <button style="margin-top: 1.5rem; width:50%; place-self: center;" class="btnsubmit">Submit</button>
 
                     </form>
                 </div>
@@ -97,6 +98,20 @@ async function packagedataa(ev){
 
 <style scoped>
 
+.imgg{
+    place-self: center;
+}
+
+.foorm{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.foorm div{
+    display: grid;
+}
+
 
 .btnsubmit{
     padding: 0.5rem 1rem;
@@ -128,6 +143,7 @@ async function packagedataa(ev){
     justify-content: center;
     align-items: center;
     font-size: 1.2rem;
+    /* position: absolute; */
 }
 
 .homegrid{
@@ -151,7 +167,7 @@ async function packagedataa(ev){
 
 .packinfo form input{
     margin: 1rem 0;
-    height: 3rem;
+    height: 2rem;
     border-radius: 10px;
     padding: 0 1rem;
 }

@@ -29,7 +29,7 @@
 
                 <h4>University of Uyo <br>Tracking sytem</h4>
 
-                <div style="margin-top: 7%; color:maroon"> Register</div>
+                <div style="margin-top: 7%; color:maroon"> </div>
 
                     <form @submit="signup" style="grid; grid-template-columns: 1fr 1fr;  column-gap: 50px;">
                         <input v-model="user.name" type="text" name="" id="name" placeholder="name" required>
@@ -40,7 +40,7 @@
                         <input v-model="user.password_confirmation" type="password" name="" id="lastname" placeholder="confirm_password" required>
 
                         <br>
-                        <button style="margin-top: 2rem;" class="btnsubmit">Submit</button>
+                        <button style="margin-top: 2rem;" class="btnsubmit">Sign up</button>
 
                     </form>
 
@@ -115,6 +115,7 @@ async function signup(ev){
     border: none;
     background-color: green;
     color: white;
+    border-radius: 5px;
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
@@ -180,6 +181,9 @@ async function signup(ev){
     background-color: transparent;
     border: none;
     text-decoration: none;
+}
+.nav h4{
+    font-size: 1.2rem;
 }
 
 

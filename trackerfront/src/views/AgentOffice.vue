@@ -51,6 +51,11 @@ import AuthServices from '../apiServices/authServices';
 import store from '../store/index.js';
 import { ref, onMounted } from 'vue';
 import loggedInNav from '../components/loggedInNav.vue'
+import { watch, onUpdated } from 'vue';
+
+onUpdated(()=>{
+    return store.state.searchpackage.package_id
+})
 
 
 const router = useRouter();
@@ -64,8 +69,8 @@ const pack = {
 }
 
 const newDesData ={
-    package_id: store.state.searchpackage.package_id,
-    staffId:   store.state.user.data.staffId,
+    // package_id: store.state.searchpackage.package_id,
+    // staffId:   store.state.user.data.staffId,
     newdestination: ''
 }
 
@@ -75,6 +80,7 @@ const errorMessage = ref('')
 
 function agentOffice(ev){
     ev.preventDefault()
+    console.log(store.state.searchpackage.package_id)
     document.getElementById('show').style.display='flex'
 }
 
@@ -82,7 +88,13 @@ async function newDes(ev){
     ev.preventDefault();
 
     try {
-        await AuthServices.newDestination(newDesData, (response)=>{
+        await AuthServices.newDestination(
+                                            {   package_id:store.state.searchpackage.package_id,
+                                                staffId:store.state.user.data.staffId,
+                                                newdestination: newDesData.newdestination
+                                            },
+                                          
+            (response)=>{
             store.dispatch('newDesData', response)
             .then((response)=>{
                 router.push({
@@ -101,7 +113,7 @@ async function newDes(ev){
 
 
 async function getPack(ev){
-    // ev.preventDefault();
+    ev.preventDefault();
 
     try {
         await AuthServices.serpack(pack, (response)=>
@@ -138,6 +150,7 @@ async function setDestination(ev){
 
     }
 }
+
 
 </script>
 

@@ -23,9 +23,9 @@
             </div>
 
         <div class="mapApi">
-            <div>{{ store.state.searchpackage.name }}</div>
-            <div>{{ store.state.searchpackage.package_id }}</div>
-            <div>{{ store.state.searchpackage.destination }}</div>
+            <div>Name: {{ store.state.searchpackage.name }}</div>
+            <div>Mail ID: {{ store.state.searchpackage.package_id }}</div>
+            <!-- <div>{{ store.state.searchpackage.destination }}</div> -->
         </div>
 
 

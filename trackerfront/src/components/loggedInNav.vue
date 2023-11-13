@@ -12,7 +12,7 @@
             <div style="margin 0 2rem">
                 <router-link class="sendn" to="/agent&destination">Receive Mail</router-link>
             </div>
-            <a @click="logout()" :style="{cursor: 'pointer', color:'maroon'}">Sign out</a >
+            <a class="sendn" @click="logout()" :style="{cursor: 'pointer', color:'maroon'}">Sign out</a >
         </div>
 
 
@@ -61,6 +61,8 @@ const router = useRouter();
 .sendn{
     text-decoration: none;
     color: maroon;
+    font-size: 1rem;
+    font-weight: bolder;
 }
 .infocontainer{
     position: fixed;
@@ -83,9 +85,14 @@ const router = useRouter();
     text-decoration: none;
 }
 
+/* .nav router-link{
+    background-color: red;
+} */
+
 .linnks{
     text-decoration: none;
     color: maroon;
+    /* font-size: 0.1rem; */
 }
 
 .navheader{
